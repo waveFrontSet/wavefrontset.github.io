@@ -15,7 +15,7 @@ since = "2019"
 math = true
 
 colorScheme = "auto"
-hidecoloschemetoggle = false
+hideColorSchemeToggle = false
 
 [permalinks]
 [permalinks.page]
@@ -36,6 +36,16 @@ url = "https://www.linkedin.com/in/paul-grillenberger-535a20264"
 name = "Blog"
 weight = 1
 url = "posts/"
+
+[[menu.main]]
+name = "Tags"
+weight = 2
+url = "tags/"
+
+[taxonomies]
+category = "categories"
+tag = "tags"
+series = "series"
 
 [markup]
 [markup.highlight]

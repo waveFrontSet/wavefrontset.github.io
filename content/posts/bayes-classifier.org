@@ -2,7 +2,7 @@
 title: The Bayes Classifier
 id: 144
 categories:
-  - maths
+  - math
 tags:
   - probability theory
   - statistics

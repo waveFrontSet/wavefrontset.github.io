@@ -6,6 +6,8 @@ categories:
 tags:
   - project
   - classification
+series:
+  - Classifying SCPs
 title: "A Machine Learning Project: Classifying SCPs, Part 0, Overview"
 url: /2019/10/20/a-machine-learning-project-classifying-scps-overview/
 ---

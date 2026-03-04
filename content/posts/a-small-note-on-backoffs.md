@@ -3,7 +3,7 @@ title: "A Small Note on Backoffs"
 date: 2023-08-27T15:00:00+02:00
 categories:
   - programming
-  - maths
+  - math
 tags:
   - python
   - http

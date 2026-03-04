@@ -5,5 +5,6 @@ draft: true
 slug: {{ .Name | lower }}
 categories: []
 tags: []
+series: []
 ---
 

@@ -8,6 +8,8 @@ tags:
   - python
   - data engineering
   - nlp
+series:
+  - Classifying SCPs
 title: "Classifying SCPs, Part 2: Data transformation (TF-IDF) and preprocessing"
 url: /2020/03/07/classifying-scps-part-2-data-transformation-and-preprocessing/
 ---

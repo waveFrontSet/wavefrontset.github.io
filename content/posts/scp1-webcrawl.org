@@ -8,6 +8,8 @@ tags:
   - webcrawl
   - data engineering
   - python
+series:
+  - Classifying SCPs
 title: "Classifying SCPs, Part 1: Building a web crawler"
 url: /2019/11/24/classifying-scps-part-1-building-a-web-crawler/
 ---

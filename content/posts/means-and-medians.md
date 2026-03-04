@@ -1,6 +1,6 @@
 ---
 categories:
-  - maths
+  - math
 date: "2019-05-19T17:04:51Z"
 id: 21
 tags:

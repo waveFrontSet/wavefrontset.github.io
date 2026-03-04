@@ -1,12 +1,12 @@
 ---
 categories:
-  - - programming
-  - - data science
-    - machine learning
+  - programming
+  - data science
 tags:
   - python
   - templates
-title: Why I created my own fork of the Data Science Cookiecutter template machine learning
+  - machine learning
+title: Why I created my own fork of the Data Science Cookiecutter template
 id: 443
 date: "2019-12-29T20:00:00Z"
 url: /2019/12/29/why-i-plan-on-moving-away-from-the-data-science-cookiecutter-template/
