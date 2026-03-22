@@ -10,73 +10,75 @@ tags:
   - codex
 ---
 
-I can't remember where I've read this, but someone wrote that there are four
-phases for a mathematician to accept new concepts and ideas:
+I can't remember where I read this, but someone once wrote that there are four
+phases of a mathematician accepting new concepts and ideas:
 
 1. "That's wrong."
 2. "Well, it might not be wrong, but the old way is better."
 3. "Well, there are cases where the new way is better."
 4. "I've always done it that (new) way."
 
-Regarding vibe coding, I've run through phases 1 and 2; to be completely
-honest, I took pride in writing good code and reviewing it: Especially in
-reviews, there's always something new to learn (both for the reviewer and
-the reviewee).
+Regarding vibe coding, I've run through phases 1 and 2. To be completely
+honest, I took pride in writing good code and reviewing it — especially in
+reviews, there's always something new to learn, both for the reviewer and
+the reviewee.
 
-Vibe coding seems to take that part of learning away from me, or so I thought.
-However, as it turned out, you can also use Vibe coding as a tool to get rid
-of boilerplate code and to learn about the domain in a more systematic way.
+In case you haven't come across the term: vibe coding means describing what you
+want in natural language and letting an AI agent write the code for you. You
+review the output, steer the direction, but you're not writing most of the code
+yourself.
+
+Vibe coding seemed to take that part of learning away from me — or so I thought.
+As it turned out, you can also use vibe coding as a tool to get rid of
+boilerplate and to learn about the domain in a more systematic way.
 
 ## Vibe Coding Experiment: A Cert Prep Tool
 
-Now, I've always wanted to build something more complex in Haskell. And ever
-since I've started learning for Cloud certifications, I've built a small TUI
-app in Python for myself in a couple of hours to sample practice questions from
-a question pool to simulate a certification exam (yes, there are some people
-who might call this procrastination).
-It didn't really have all the bells and whistles but it worked well enough.
+I've always wanted to build something more complex in Haskell. And ever
+since I started studying for cloud certifications, I had built a small TUI
+app in Python to sample practice questions from a question pool and simulate
+a certification exam (yes, some people might call this procrastination).
+It didn't have all the bells and whistles, but it worked well enough.
 When I found out about [the brick
 library](https://hackage.haskell.org/package/brick)
-in Haskell that makes it possible to build TUIs in Haskell, I thought that it
-would be a good learning opportunity to rebuild this certification prep tool
-in Haskell.
+for building TUIs in Haskell, I thought it would be a good learning
+opportunity to rebuild this tool in Haskell.
 
-And so I started to create the project foundations with a simple `cabal init`,
+So I started by creating the project foundations with a simple `cabal init`,
 wrote the necessary types (questions, answers, configuration), some utility
-functions and a few tests. I thought this setup would prove to be a good guard
-rail for Claude Code (if I throw the AI agent into a project with good
-conventions, it's more likely to follow them).
-Plus, the strict and elaborate type system of Haskell makes it
-harder to make mistakes because conditions, restrictions and rules
-are already present on the type level.
+functions, and a few tests. I thought this setup would serve as a good
+guardrail for Claude Code — if you throw the AI agent into a project with
+good conventions, it's more likely to follow them.
+Plus, Haskell's strict and elaborate type system makes it
+harder to make mistakes because conditions, restrictions, and rules
+are already encoded at the type level.
 Contrast this with Python, where type hints are entirely optional
 (even though they are a firm part of modern Python code and libraries
 such as [pydantic](https://docs.pydantic.dev/latest/)).
 
 ## Liftoff with Claude Code
 
-And then I started to prompt Claude Code to write the TUI app.
-In less than an evening, I had feature parity with my old Python app,
-and more: I also had a feature for sampling questions in a stratified manner,
-so that I could even simulate the distribution of question types in the real
-exam.
+Then I started prompting Claude Code to write the TUI app.
+In less than an evening, I had feature parity with my old Python app —
+and more: I also had stratified question sampling,
+so I could simulate the distribution of question types in the real exam.
 
-For the first few iterations, my skepticism (phase 1 and 2, remember?) faded
-almost completely. The code was clean, test cases were alright, and I could
-even learn about
-[lenses](https://www.schoolofhaskell.com/school/to-infinity-and-beyond/pick-of-the-week/a-little-lens-starter-tutorial)
-which proved to be an ever bigger rabbit hole than the whole Monad machinery.
+Over the first few iterations, my skepticism (phases 1 and 2, remember?) faded
+almost completely. The code was clean, test cases were solid, and I got to
+learn about
+[lenses](https://www.schoolofhaskell.com/school/to-infinity-and-beyond/pick-of-the-week/a-little-lens-starter-tutorial),
+which proved to be an even bigger rabbit hole than the whole Monad machinery.
 
-I quickly had a configuration registry so that I could gather and choose
+I quickly had a configuration registry to gather and choose
 between different question pools. Refactorings and reviews were
-also quick.
+equally fast.
 
 ## Claude Code vs. Codex: Trophy System
 
-Because codex had a free tier offer till March 2026, I decided to
-let Claude Code battle against Codex for the shiniest feature so far:
-I wanted to integrate a Trophy System for the preparation with a small
-animation popping up, similar to what happens in video games.
+Because Codex had a free tier offer until March 2026, I decided to
+pit Claude Code against Codex for the shiniest feature so far:
+a trophy system for the preparation, with a small animation popping up
+when you earn one, similar to what happens in video games.
 
 Here's the prompt I gave to both:
 
@@ -152,20 +154,20 @@ checkAtFinish finalScore totalQs alreadyEarned =
         | otherwise = (finalScore * 100) `div` totalQs
 ```
 
-Deciphering the trophy conditions took me a while. First I thought that
-it was using guard clauses, but then I realized that it is using list
-comprehensions where the condition doesn't depend on the list elements!
+Deciphering the trophy conditions took me a while. At first I thought
+it was using guard clauses, but then I realized it's using list
+comprehensions where the condition doesn't depend on the list elements.
 For instance, `[firstBloodDef | wasCorrect]` is equivalent to
-`if wasCorrect then [firstBloodDef] else []`. That's undeniably clever
-but also fairly confusing, not to mention the little extra work involved
-for unwrapping the list of lists with `concatMap`.
+`if wasCorrect then [firstBloodDef] else []`. Undeniably clever,
+but also fairly confusing — not to mention the extra work involved
+in unwrapping the list of lists with `concatMap`.
 
 ### Codex's implementation
 
-Codex was blazingly fast, clocking in at around 4 minutes (no dedicated
-planning phase).
+Codex was blazingly fast, clocking in at around 4 minutes with no dedicated
+planning phase.
 
-Codex decided to put the trophy conditions into `app/TUI/Event.hs`
+It decided to put the trophy conditions into `app/TUI/Event.hs`
 
 ```haskell
 isUnlockedBy :: ExamCore -> Bool -> Int -> Trophy -> Bool
@@ -202,20 +204,20 @@ data Trophy = Trophy
 ```
 
 While there's an argument for putting code right where it's called,
-I would have favored putting trophy conditions close to the data model
-of trophies. Otherwise, adding a new trophy would mean to touch at least
-two files instead of one. Arguably, Codex's approach is easier to understand
-and uses the Lens machinery - with the cost of tightly coupling trophy
-conditions to the state model of the event logic.
+I would have preferred keeping trophy conditions close to the data model.
+Otherwise, adding a new trophy means touching at least two files instead
+of one. That said, Codex's approach is arguably easier to understand
+and makes good use of the lens machinery — at the cost of tightly coupling
+trophy conditions to the state model of the event logic.
 
 ## My verdict
 
-I slightly preferred Claude Code's approach, keeping the trophy conditions
+I slightly preferred Claude Code's approach of keeping the trophy conditions
 close to the data model. However, I strongly disliked the tricky list
-comprehensions - which is why I came up with the following variant integrating
+comprehensions — which is why I came up with my own variant that integrates
 trophy conditions directly into the data model.
 
-First, I used `DataKinds` and `TypeFamilies` to divide trophies into ones
+I used `DataKinds` and `TypeFamilies` to divide trophies into ones
 checked after each answer and ones checked at the end of the exam.
 
 ```haskell
@@ -243,9 +245,9 @@ data TrophyData (t :: TrophyCheckTime) = TrophyData
 
 ```
 
-Then, I defined the conditions for each trophy separately and tied
-them to the data model. Here's an example for the first blood trophy (earned
-after answering the first question correctly):
+Then I defined conditions for each trophy separately, tied to the data model.
+Here's the "First Blood" trophy as an example (earned after answering the
+first question correctly):
 
 ```haskell
 -- Trophy definitions
@@ -256,8 +258,8 @@ firstBlood :: TrophyData 'WhenReviewing
 firstBlood = TrophyData{trophyDef = firstBloodDef, trophyCond = currentStreakGte 1}
 ```
 
-Then the check functions for all trophies become basic `map`s of `trophyCond` over the list of all
-trophies.
+The check functions then become simple `map`s of `trophyCond` over the list of
+all trophies.
 
 ```haskell
 -- | Check for trophies earned after submitting an answer.
@@ -283,19 +285,25 @@ checkAtFinish fs =
 
 ## Conclusion
 
-The main takeaway for me is that getting up and running with Claude Code, even in
-a language you're not entirely familiar with, is incredibly fast. Even more: I felt
-like I could learn relevant Haskell concepts (like the Lens machinery) much quicker
--- or I might have not even used them at all.
+My main takeaway is that getting up and running with Claude Code, even in
+a language you're not entirely familiar with, is incredibly fast. More than that,
+I felt like I could learn relevant Haskell concepts (like lenses) much quicker
+than I would have on my own — or I might not have used them at all.
 
 The trophy feature also showed me that extending existing software with vibe
-coding, while certainly leading to functional results, will at some point lead
-to technical debt. In our case, the implementation of the trophy system might
-seem to be a small nuisance, but note that I haven't actually shown you the
-event code for the trophy system: Instead of introducing a separate phase
-for evaluating trophies, Claude Code integrated them directly into the answering
-and final phase of the exam. I haven't gotten to refactor that code yet, but
-that is definitely something I'd like to do in the future.
+coding, while certainly producing functional results, will at some point lead
+to technical debt. The trophy conditions I showed above might seem like a small
+nuisance, but note that I haven't shown you the event code for the trophy
+system: instead of introducing a separate phase for evaluating trophies,
+Claude Code integrated them directly into the answering and final phase of the
+exam. I haven't gotten around to refactoring that code yet, but it's
+definitely on my list.
 
-In case you want to take a look at the code in its entirety, I've published it
-at [GitHub](https://github.com/waveFrontSet/cert-prep).
+So where does that leave me on the four-phase scale? I think I'm solidly in
+phase 3. There are clearly cases where vibe coding is better — spinning up a
+project, plowing through boilerplate, exploring unfamiliar libraries. But I
+still want to understand and reshape the code that comes out, and I don't see
+that changing anytime soon. Phase 4 will have to wait.
+
+If you want to take a look at the full code, I've published it
+on [GitHub](https://github.com/waveFrontSet/cert-prep).
