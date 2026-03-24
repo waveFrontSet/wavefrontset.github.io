@@ -23,10 +23,12 @@ honest, I took pride in writing good code and reviewing it — especially in
 reviews, there's always something new to learn, both for the reviewer and
 the reviewee.
 
+{{< notice info >}}
 In case you haven't come across the term: vibe coding means describing what you
 want in natural language and letting an AI agent write the code for you. You
 review the output, steer the direction, but you're not writing most of the code
 yourself.
+{{< /notice >}}
 
 Vibe coding seemed to take that part of learning away from me — or so I thought.
 As it turned out, you can also use vibe coding as a tool to get rid of
