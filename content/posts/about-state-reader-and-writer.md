@@ -1,7 +1,6 @@
 ---
 title: "About State, Reader, and Writer"
 date: 2026-05-18T20:00:00+02:00
-draft: true
 slug: about-state-reader-and-writer
 categories:
   - programming
