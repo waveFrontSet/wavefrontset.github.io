@@ -1,6 +1,6 @@
 baseURL = 'https://paul-grillenberger.de'
 disablePathToLower = true
-languageCode = 'en-us'
+locale = 'en-us'
 title = 'GriP on math, music, and programming'
 theme = 'hugo-coder'
 math = true
